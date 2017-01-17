@@ -28,7 +28,7 @@ angular.module('steempoll.poll', ['ngRoute'])
     $scope.castingVote = true;
   }
   $scope.confirmVote = function(){
-    steem.broadcast.vote($scope.user.wif, $scope.user.voter, "demo", $routeParams.permlink, $scope.percent*100, function(err, result) {
+    steem.broadcast.vote($scope.user.wif, $scope.user.voter, "steempoll", $routeParams.permlink, $scope.percent*100, function(err, result) {
         //console.log(err, result);
         if (result) {
           $scope.castingVote = false;
@@ -85,7 +85,7 @@ angular.module('steempoll.poll', ['ngRoute'])
     }
   }
   if ($routeParams.permlink) {
-    steem.api.getContent("demo", $routeParams.permlink, function(err, result) {
+    steem.api.getContent("steempoll", $routeParams.permlink, function(err, result) {
       if (err) {
         alert('Error fetching post, please reload the page!');
       }
