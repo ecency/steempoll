@@ -1,0 +1,39 @@
+<div class="lists">
+  <div ng-repeat="item in list">
+    <div class="card-deck" ng-if="$index % 3 == 0">
+      <div class="card" ng-if="list[$index]">
+        <img class="card-img-top" ng-src="img/poll.png" style="width:100%;" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"> {{list[$index].title}} </h4>
+          <p class="card-text">...</p>
+          <a href="#!poll/{{list[$index].permlink}}" class="btn btn-primary">More</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Created {{list[$index].last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
+        </div>
+      </div>
+      <div class="card" ng-if="list[$index+1]">
+        <img class="card-img-top" ng-src="img/poll.png" style="width:100%;" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"> {{list[$index+1].title}} </h4>
+          <p class="card-text">...</p>
+          <a href="#!poll/{{list[$index+1].permlink}}" class="btn btn-primary">More</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Created {{list[$index+1].last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
+        </div>
+      </div>
+      <div class="card" ng-if="list[$index+2]">
+        <img class="card-img-top" ng-src="img/poll.png" style="width:100%;" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"> {{list[$index+2].title}} </h4>
+          <p class="card-text">...</p>
+          <a href="#!poll/{{list[$index+2].permlink}}" class="btn btn-primary">More</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Created {{list[$index+2].last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

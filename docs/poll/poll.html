@@ -1,0 +1,39 @@
+<div class="poll">
+  <div class="card">
+    <img class="card-img-top" ng-src="img/poll.png" style="width:100%;" alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title"> {{post.title}} </h4>
+      <p class="card-text" ng-bind-html="post.body"></p>
+      <div ng-if="poll" ng-repeat="p in poll.choices">
+        <label>
+          <input type="radio" ng-model="user.choice" value="{{p.id}}">
+          {{p.name}}
+        </label><br/>
+      </div>
+      <div class="btn-group" ng-if="poll" role="group" aria-label="Toolbar">
+        <button type="button" class="btn btn-primary" ng-click="castVote()">Cast a vote</button>
+        <button type="button" class="btn btn-secondary" ng-click="showResults()"><span ng-if="!results">Show</span><span ng-if="results">Hide</span> results</button>
+      </div>
+      <div ng-if="poll&&castingVote">
+        <div class="form-group">
+          <label for="title1"></label>
+          <input type="text" class="form-control" id="title1" aria-describedby="titleHelp" placeholder="Enter username, e.g. good-karma" ng-model="user.voter">
+          <small id="titleHelp" class="form-text text-muted">Plain username on Steem, without <b>@</b></small>
+        </div>
+        <div class="form-group">
+          <label for="title2"></label>
+          <input type="text" class="form-control" id="title2" aria-describedby="title2Help" placeholder="Enter wif private posting key, e.g. 5XYZ..." ng-model="user.wif">
+          <small id="title2Help" class="form-text text-muted">Key is used to cast a vote, never sent to server or saved.</small>
+        </div>
+        <a ng-click="confirmVote()" class="btn btn-success">Confirm</a>
+      </div>
+      <div class="" ng-if="post&&results">
+        <div google-chart chart="barObject" style="height:600px;width:100%;"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Created {{post.last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
+    </div>
+  </div>
+
+</div>
