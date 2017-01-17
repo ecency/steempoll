@@ -27,12 +27,12 @@ angular.module('steempoll.poll', ['ngRoute'])
       var numchs = $scope.poll.choices.length;
       var per = Math.round(100/numchs);
       $scope.user.finalc = $scope.user.choice.substring(6);
-      $scope.percent = per*Number($scope.user.finalc)-1;
+      $scope.user.percent = per*Number($scope.user.finalc)-1;
       $scope.castingVote = true;
     }
   }
   $scope.confirmVote = function(){
-    var perc = $scope.percent*100;
+    var perc = $scope.user.percent*100;
     steem.broadcast.vote($scope.user.wif, $scope.user.voter, "steempoll", $routeParams.permlink, perc, function(err, result) {
         //console.log(err, result);
         if (result) {
