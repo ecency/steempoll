@@ -55,5 +55,6 @@ body {
 
 .lists .card-block .btn {
   position: absolute;
+  float: right;
   bottom: 10px;
 }
