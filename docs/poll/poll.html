@@ -27,9 +27,7 @@
         </div>
         <a ng-click="confirmVote()" class="btn btn-success">Confirm</a>
       </div>
-      <div class="" ng-if="post&&results">
-        <div google-chart chart="barObject" style="height:600px;width:100%;"></div>
-      </div>
+      <div google-chart chart="barObject" style="height:600px;width:100%;" ng-if="post&&results"></div>
     </div>
     <div class="card-footer">
       <small class="text-muted">Created {{post.last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
