@@ -33,7 +33,9 @@ angular.module('steempoll.poll', ['ngRoute'])
   }
   $scope.confirmVote = function(){
     var perc = $scope.user.percent*100;
-    steem.broadcast.vote($scope.user.wif, $scope.user.voter, "steempoll", $routeParams.permlink, perc, function(err, result) {
+    var wif = steem.auth.isWif($scope.user.wif) ? $scope.user.wif : steem.auth.toWif($scope.user.voter, $scope.user.wif, 'posting');
+
+    steem.broadcast.vote(wif, $scope.user.voter, "steempoll", $routeParams.permlink, perc, function(err, result) {
         //console.log(err, result);
         if (result) {
           $scope.castingVote = false;
