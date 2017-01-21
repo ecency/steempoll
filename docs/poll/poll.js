@@ -11,11 +11,26 @@ angular.module('steempoll.poll', ['ngRoute'])
 
 .controller('PollCtrl', function($scope, $routeParams, APIs) {
 
-  var stripData = function(text){
+  var stripData = function(tt){
+    console.log(tt.body);
+
+    var text = tt.body;
     var stripchoices = text.split(/<chs>/);
-    var jchs = stripchoices[0]+stripchoices[2];
+    console.log(stripchoices.length);
+    var jchs = "";
+    if (stripchoices.length>1) {
+      jchs = stripchoices[0]+stripchoices[2];
+    } else {
+      return tt.url;
+    }
     var stripinstructions = jchs.split(/<ein>/);
-    return stripinstructions[0]+stripinstructions[2];
+    console.log(stripinstructions.length);
+
+    if (stripinstructions.length>1) {
+      return stripinstructions[0]+stripinstructions[2];
+    } else {
+      return tt.url;  
+    }
   }
   $scope.castingVote = false;
   $scope.user = {};
@@ -99,8 +114,11 @@ angular.module('steempoll.poll', ['ngRoute'])
       if (result) {
 
         result.json_metadata = angular.fromJson(result.json_metadata||{})||{};        
-        result.body = stripData(result.body);
+        
+        result.body = stripData(result);
+
         $scope.post = result;
+        
         if (result.json_metadata.tags) {
           if (result.json_metadata.pollid) {
             APIs.getPoll(result.json_metadata.pollid).then(function(res){
