@@ -12,24 +12,22 @@ angular.module('steempoll.poll', ['ngRoute'])
 .controller('PollCtrl', function($scope, $routeParams, APIs) {
 
   var stripData = function(tt){
-    console.log(tt.body);
+    //console.log(tt.body);
 
     var text = tt.body;
     var stripchoices = text.split(/<chs>/);
-    console.log(stripchoices.length);
     var jchs = "";
     if (stripchoices.length>1) {
       jchs = stripchoices[0]+stripchoices[2];
     } else {
-      return tt.url;
+      return "";
     }
     var stripinstructions = jchs.split(/<ein>/);
-    console.log(stripinstructions.length);
 
     if (stripinstructions.length>1) {
       return stripinstructions[0]+stripinstructions[2];
     } else {
-      return tt.url;  
+      return "";  
     }
   }
   $scope.castingVote = false;
@@ -110,12 +108,12 @@ angular.module('steempoll.poll', ['ngRoute'])
   $scope.category = $routeParams.category;
   $scope.permlink = $routeParams.permlink;
   if ($routeParams.permlink) {
-    steem.api.getContent("steempoll", $routeParams.permlink, function(err, result) {
+    steem.api.getContent($routeParams.author, $routeParams.permlink, function(err, result) {
       if (err) {
         alert('Error fetching post, please reload the page!');
       }
       if (result) {
-
+        //console.log(result)
         result.json_metadata = angular.fromJson(result.json_metadata||{})||{};        
         
         result.body = stripData(result);
