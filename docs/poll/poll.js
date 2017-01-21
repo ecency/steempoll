@@ -97,7 +97,7 @@ angular.module('steempoll.poll', ['ngRoute'])
         alert('Error fetching post, please reload the page!');
       }
       if (result) {
-        result.json_metadata = angular.fromJson(angular.fromJson(result.json_metadata))||{};
+        result.json_metadata = angular.fromJson(angular.fromJson(result.json_metadata)||{});
         result.body = stripData(result.body);
         $scope.post = result;
         if (result.json_metadata.pollid) {
