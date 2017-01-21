@@ -3,7 +3,7 @@
     <img class="card-img-top" ng-src="img/poll.png" style="width:50%;" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title"> {{post.title}} </h4>
-      <p ng-if="user.annon">THIS POST IS NOT A POLL BUT ANNOUNCEMENT</p>
+      <p ng-if="user.annon&&post">THIS POST IS NOT A POLL BUT ANNOUNCEMENT<br>Visit: <a href="https://steemit.com/{{category}}/@{{author}}/{{permlink}}">Link</a></p>
       <p class="card-text" ng-bind-html="post.body"></p>
       <div ng-if="poll" ng-repeat="p in poll.choices">
         <label>

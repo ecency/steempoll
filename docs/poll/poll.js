@@ -3,7 +3,7 @@
 angular.module('steempoll.poll', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/poll/:permlink', {
+  $routeProvider.when('/poll/:category/:author/:permlink', {
     templateUrl: 'poll/poll.html',
     controller: 'PollCtrl'
   });
@@ -106,6 +106,9 @@ angular.module('steempoll.poll', ['ngRoute'])
       }, 10);
     }
   }
+  $scope.author = $routeParams.author;
+  $scope.category = $routeParams.category;
+  $scope.permlink = $routeParams.permlink;
   if ($routeParams.permlink) {
     steem.api.getContent("steempoll", $routeParams.permlink, function(err, result) {
       if (err) {
@@ -118,7 +121,7 @@ angular.module('steempoll.poll', ['ngRoute'])
         result.body = stripData(result);
 
         $scope.post = result;
-        
+
         if (result.json_metadata.tags) {
           if (result.json_metadata.pollid) {
             APIs.getPoll(result.json_metadata.pollid).then(function(res){
