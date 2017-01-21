@@ -97,16 +97,28 @@ angular.module('steempoll.poll', ['ngRoute'])
         alert('Error fetching post, please reload the page!');
       }
       if (result) {
-        result.json_metadata = angular.fromJson(angular.fromJson(result.json_metadata)||{});
+        result.json_metadata = angular.fromJson(result.json_metadata);
         result.body = stripData(result.body);
         $scope.post = result;
-        if (result.json_metadata.pollid) {
-          APIs.getPoll(result.json_metadata.pollid).then(function(res){
-            $scope.poll = res.data;
-          });
+        if (result.json_metadata.tags) {
+          if (result.json_metadata.pollid) {
+            APIs.getPoll(result.json_metadata.pollid).then(function(res){
+              $scope.poll = res.data;
+            });
+          } else {
+            $scope.user.annon = true;
+          }
         } else {
-          $scope.user.annon = true;
+          result.json_metadata = angular.fromJson(angular.fromJson(result.json_metadata));
+          if (result.json_metadata.pollid) {
+            APIs.getPoll(result.json_metadata.pollid).then(function(res){
+              $scope.poll = res.data;
+            });
+          } else {
+            $scope.user.annon = true;
+          }
         }
+        
       }
       if (!$scope.$$phase){
         $scope.$apply();
