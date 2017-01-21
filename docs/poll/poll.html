@@ -3,6 +3,7 @@
     <img class="card-img-top" ng-src="img/poll.png" style="width:50%;" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title"> {{post.title}} </h4>
+      <p ng-if="user.annon">THIS POST IS NOT A POLL BUT ANNOUNCEMENT</p>
       <p class="card-text" ng-bind-html="post.body"></p>
       <div ng-if="poll" ng-repeat="p in poll.choices">
         <label>
@@ -10,6 +11,7 @@
           {{p.name}}
         </label><br/>
       </div>
+
       <div class="btn-group" ng-if="poll" role="group" aria-label="Toolbar">
         <button type="button" class="btn btn-primary" ng-click="castVote()">Cast a vote</button>
         <button type="button" class="btn btn-secondary" ng-click="showResults()"><span ng-if="!results">Show</span><span ng-if="results">Hide</span> results</button>
