@@ -101,6 +101,9 @@ angular.module('steempoll.poll', ['ngRoute'])
         $scope.barObject.options = {
             'title': $scope.poll.title
         };
+        if (!$scope.$$phase){
+          $scope.$apply();
+        }
       }, 10);
     }
   }
@@ -113,7 +116,7 @@ angular.module('steempoll.poll', ['ngRoute'])
         alert('Error fetching post, please reload the page!');
       }
       if (result) {
-        //console.log(result)
+        console.log(result)
         result.json_metadata = angular.fromJson(result.json_metadata||{})||{};        
         
         result.body = stripData(result);
